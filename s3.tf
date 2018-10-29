@@ -6,37 +6,40 @@ resource "aws_s3_bucket" "www" {
     target_prefix = "logs/"
   }
 
-  acl = "public-read"
+  acl = "private"
+}
 
-  website {
-    index_document = "index.html"
-    error_document = "404.html"
+data "aws_iam_policy_document" "s3_policy" {
+  statement {
+    actions   = ["s3:GetObject"]
+    resources = ["${aws_s3_bucket.www.arn}/*"]
+
+    principals {
+      type        = "AWS"
+      identifiers = ["${aws_cloudfront_origin_access_identity.origin_access_identity.iam_arn}"]
+    }
+  }
+
+  statement {
+    actions   = ["s3:ListBucket"]
+    resources = ["${aws_s3_bucket.www.arn}"]
+
+    principals {
+      type        = "AWS"
+      identifiers = ["${aws_cloudfront_origin_access_identity.origin_access_identity.iam_arn}"]
+    }
   }
 }
 
 resource "aws_s3_bucket_policy" "www" {
   bucket = "${aws_s3_bucket.www.id}"
-
-  policy = <<POLICY
-{
-  "Version": "2012-10-17",
-  "Id": "grahamsfancybucketpolicy",
-  "Statement": [
-    {
-      "Sid": "AddPerm",
-      "Effect": "Allow",
-      "Principal": "*",
-      "Action": "s3:GetObject",
-      "Resource":["arn:aws:s3:::${var.bucket_name}/*"]
-    }
-  ]
-}
-POLICY
+  policy = "${data.aws_iam_policy_document.s3_policy.json}"
 }
 
 resource "aws_s3_bucket" "301" {
   bucket = "${var.301_name}"
-  acl = "public-read"
+  acl    = "public-read"
+
   website {
     redirect_all_requests_to = "https://${var.root_domain_name}"
   }
@@ -64,4 +67,13 @@ POLICY
 
 resource "aws_s3_bucket" "log_bucket" {
   bucket = "grahamgilbert-logs"
+
+  lifecycle_rule {
+    enabled = true
+
+    transition {
+      days          = "30"
+      storage_class = "STANDARD_IA"
+    }
+  }
 }

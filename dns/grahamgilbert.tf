@@ -62,18 +62,18 @@ resource "aws_route53_record" "server_alias" {
   records = ["gg-home.ddns.net"]
 }
 
-
 resource "aws_route53_record" "mx" {
   zone_id = "${aws_route53_zone.main.zone_id}"
   type    = "MX"
   name    = "${var.main_zone_host}"
   ttl     = 300
+
   records = [
-      "60 aspmx4.googlemail.com",
+    "60 aspmx4.googlemail.com",
     "10 aspmx.l.google.com",
-"50 aspmx3.googlemail.com",
-"20 alt2.aspmx.l.google.com",
-"40 aspmx2.googlemail.com",
-"30 alt1.aspmx.l.google.com"
-      ]
+    "50 aspmx3.googlemail.com",
+    "20 alt2.aspmx.l.google.com",
+    "40 aspmx2.googlemail.com",
+    "30 alt1.aspmx.l.google.com",
+  ]
 }
