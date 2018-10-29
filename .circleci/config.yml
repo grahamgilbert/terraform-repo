@@ -1,3 +1,4 @@
+
 version: 2
 
 jobs:
@@ -9,3 +10,37 @@ jobs:
       - run:
           name: Validate Terraform Formatting
           command: "[ -z \"$(terraform fmt -write=false)\" ] || { terraform fmt -write=false -diff; exit 1; }"
+      - run:
+          name: Initialize Terraform
+          command: terraform init
+      - run:
+          name: Get Terraform
+          command: terraform get
+      - run:
+          name: Plan Terraform
+          command: terraform plan
+
+  deploy:
+    docker:
+      - image: hashicorp/terraform
+    steps:
+      - checkout
+      - run:
+          name: Initialize Terraform
+          command: terraform init
+      - run:
+          name: Deploy
+          command: terraform apply -auto-approve
+
+workflows:
+  version: 2
+  deploy:
+    jobs:
+      - validate_terraform
+
+      - deploy:
+          requires:
+            - validate_terraform
+          filters:
+            branches:
+              only: master
