@@ -1,4 +1,3 @@
-# terraform import module.dns.aws_route53_record.gg-ns Z2VP0FHJ6U7I35_grahamgilbert.com_NS
 variable "main_zone_host" {
   default = "grahamgilbert.com"
 }
