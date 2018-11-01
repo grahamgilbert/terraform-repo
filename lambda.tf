@@ -24,7 +24,7 @@ EOF
 data "archive_file" "redirect_lambda_zip" {
   type = "zip"
 
-  output_path             = "redirect_lambda.zip"
+  output_path = "redirect_lambda.zip"
   source_file = "${path.module}/lambda_code/redirect.js"
 }
 
