@@ -30,8 +30,8 @@ resource "aws_cloudfront_distribution" "www_distribution" {
     // This needs to match the `origin_id` above.
     target_origin_id = "${var.root_domain_name}"
     min_ttl          = 0
-    default_ttl      = 86400
-    max_ttl          = 31536000
+    default_ttl      = 1800
+    max_ttl          = 3600
 
     forwarded_values {
       query_string = false
