@@ -34,6 +34,6 @@ resource "aws_lambda_function" "redirect_lambda" {
   role             = "${aws_iam_role.iam_for_redirect_lambda.arn}"
   handler          = "redirect.handler"
   source_code_hash = "${data.archive_file.redirect_lambda_zip.output_base64sha256}"
-  runtime          = "nodejs8.10"
+  runtime          = "nodejs10.x"
   publish          = true
 }
