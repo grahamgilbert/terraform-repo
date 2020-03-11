@@ -64,7 +64,7 @@ EOF
 data "archive_file" "hsts_lambda_zip" {
   type = "zip"
 
-  output_path = "hsts_lambda_.zip"
+  output_path = "hsts_lambda.zip"
   source_file = "${path.module}/lambda_code/hsts.js"
 }
 
