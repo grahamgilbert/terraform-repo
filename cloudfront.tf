@@ -1,7 +1,7 @@
 resource "aws_cloudfront_distribution" "www_distribution" {
   origin {
     // Here we're using our S3 bucket's URL!
-    domain_name = "${aws_s3_bucket.www.bucket_regional_domain_name}"
+    domain_name = aws_s3_bucket.www.bucket_regional_domain_name
 
     // This can be any name to identify this origin.
     origin_id = "${var.root_domain_name}"
@@ -20,6 +20,11 @@ resource "aws_cloudfront_distribution" "www_distribution" {
     lambda_function_association {
       event_type = "origin-request"
       lambda_arn = "${aws_lambda_function.redirect_lambda.arn}:${aws_lambda_function.redirect_lambda.version}"
+    }
+
+    lambda_function_association {
+      event_type = "origin-response"
+      lambda_arn = "${aws_lambda_function.hsts_lambda.arn}:${aws_lambda_function.hsts_lambda.version}"
     }
 
     viewer_protocol_policy = "redirect-to-https"
