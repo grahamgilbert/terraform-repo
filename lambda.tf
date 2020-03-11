@@ -38,7 +38,6 @@ resource "aws_lambda_function" "redirect_lambda" {
   publish          = true
 }
 
-
 resource "aws_iam_role" "iam_for_hsts_lambda" {
   name = "iam_for_hsts_lambda"
 

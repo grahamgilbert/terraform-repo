@@ -36,8 +36,8 @@ resource "aws_s3_bucket_policy" "www" {
   policy = "${data.aws_iam_policy_document.s3_policy.json}"
 }
 
-resource "aws_s3_bucket" "301" {
-  bucket = "${var.301_name}"
+resource "aws_s3_bucket" "three_oh_one" {
+  bucket = "${var.three_oh_one_name}"
   acl    = "public-read"
 
   website {
@@ -58,7 +58,7 @@ resource "aws_s3_bucket_policy" "301" {
       "Effect": "Allow",
       "Principal": "*",
       "Action": "s3:GetObject",
-      "Resource":["arn:aws:s3:::${var.301_name}/*"]
+      "Resource":["arn:aws:s3:::${var.three_oh_one_name}/*"]
     }
   ]
 }
