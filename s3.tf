@@ -45,8 +45,8 @@ resource "aws_s3_bucket" "three_oh_one" {
   }
 }
 
-resource "aws_s3_bucket_policy" "301" {
-  bucket = "${aws_s3_bucket.301.id}"
+resource "aws_s3_bucket_policy" "three_oh_one" {
+  bucket = aws_s3_bucket.three_oh_one.id
 
   policy = <<POLICY
 {
