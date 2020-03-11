@@ -23,6 +23,6 @@ variable "bucket_name" {
   default = "grahamgilbertcom"
 }
 
-variable "301_name" {
+variable "three_oh_one_name" {
   default = "grahamgilbert-301"
 }
