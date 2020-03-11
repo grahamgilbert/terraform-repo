@@ -22,6 +22,11 @@ resource "aws_cloudfront_distribution" "www_distribution" {
       lambda_arn = "${aws_lambda_function.redirect_lambda.arn}:${aws_lambda_function.redirect_lambda.version}"
     }
 
+    lambda_function_association {
+      event_type = "origin-response"
+      lambda_arn = "${aws_lambda_function.hsts_lambda.arn}:${aws_lambda_function.hsts_lambda.version}"
+    }
+
     viewer_protocol_policy = "redirect-to-https"
     compress               = true
     allowed_methods        = ["GET", "HEAD"]
