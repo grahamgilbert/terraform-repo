@@ -44,13 +44,13 @@ resource "aws_route53_record" "grahamgilbert_root" {
   }
 }
 
-resource "aws_route53_record" "www" {
-  zone_id = "${aws_route53_zone.main.zone_id}"
-  type    = "CNAME"
-  name    = "www.grahamgilbert.com"
-  ttl     = 300
-  records = ["grahamgilbert.com"]
-}
+# resource "aws_route53_record" "www" {
+#   zone_id = "${aws_route53_zone.main.zone_id}"
+#   type    = "CNAME"
+#   name    = "www.grahamgilbert.com"
+#   ttl     = 300
+#   records = ["grahamgilbert.com"]
+# }
 
 resource "aws_route53_record" "gsuite_subdomains" {
   zone_id = "${aws_route53_zone.main.zone_id}"
