@@ -30,7 +30,7 @@ data "archive_file" "redirect_lambda_zip" {
 
 resource "aws_lambda_function" "redirect_lambda" {
   filename         = "redirect_lambda.zip"
-  function_name    = "redirect_lambda"
+  function_name    = "gg_dot_com_redirect_lambda"
   role             = "${aws_iam_role.iam_for_redirect_lambda.arn}"
   handler          = "redirect.handler"
   source_code_hash = "${data.archive_file.redirect_lambda_zip.output_base64sha256}"
