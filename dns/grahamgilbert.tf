@@ -1,9 +1,3 @@
-
-
-# variable "main_cloudfront_name" {}
-
-# variable "main_cloudfront_hosted_zone_id" {}
-
 variable "gsuite_subdomains" {
   default = [
     "mail.grahamgilbert.com",
