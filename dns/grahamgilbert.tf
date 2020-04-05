@@ -1,10 +1,8 @@
-variable "main_zone_host" {
-  default = "grahamgilbert.com"
-}
 
-variable "main_cloudfront_name" {}
 
-variable "main_cloudfront_hosted_zone_id" {}
+# variable "main_cloudfront_name" {}
+
+# variable "main_cloudfront_hosted_zone_id" {}
 
 variable "gsuite_subdomains" {
   default = [
@@ -33,7 +31,7 @@ variable "gsuite_subdomains" {
 # }
 
 resource "aws_route53_record" "grahamgilbert_root" {
-  zone_id = "${aws_route53_zone.main.zone_id}"
+  zone_id = "${var.zone_id}"
   type    = "A"
   name    = "${var.main_zone_host}"
 
@@ -45,7 +43,7 @@ resource "aws_route53_record" "grahamgilbert_root" {
 }
 
 # resource "aws_route53_record" "www" {
-#   zone_id = "${aws_route53_zone.main.zone_id}"
+#   zone_id = "${var.zone_id}"
 #   type    = "CNAME"
 #   name    = "www.grahamgilbert.com"
 #   ttl     = 300
@@ -53,7 +51,7 @@ resource "aws_route53_record" "grahamgilbert_root" {
 # }
 
 resource "aws_route53_record" "gsuite_subdomains" {
-  zone_id = "${aws_route53_zone.main.zone_id}"
+  zone_id = "${var.zone_id}"
   count   = "${length(var.gsuite_subdomains)}"
   type    = "CNAME"
   name    = "${element(var.gsuite_subdomains, count.index)}"
@@ -62,7 +60,7 @@ resource "aws_route53_record" "gsuite_subdomains" {
 }
 
 resource "aws_route53_record" "server_alias" {
-  zone_id = "${aws_route53_zone.main.zone_id}"
+  zone_id = "${var.zone_id}"
   type    = "CNAME"
   name    = "server.grahamgilbert.com"
   ttl     = 300
@@ -70,7 +68,7 @@ resource "aws_route53_record" "server_alias" {
 }
 
 resource "aws_route53_record" "mx" {
-  zone_id = "${aws_route53_zone.main.zone_id}"
+  zone_id = "${var.zone_id}"
   type    = "MX"
   name    = "${var.main_zone_host}"
   ttl     = 300
