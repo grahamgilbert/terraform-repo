@@ -3,11 +3,13 @@ provider "aws" {
 }
 
 terraform {
-  backend "s3" {
-    bucket  = "grahamgilbert-terraform"
-    region  = "us-east-1"
-    encrypt = "true"
-    key     = "ggdotcom/terraform_state"
+  backend "remote" {
+    hostname = "app.terraform.io"
+    organization = "grahamgilbert"
+
+    workspaces {
+      name = "terraform-repo"
+    }
   }
 }
 
