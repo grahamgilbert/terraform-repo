@@ -40,7 +40,7 @@ resource "aws_lambda_function" "redirect_lambda" {
 
 
 resource "aws_iam_policy" "lambda_logging" {
-  name        = "lambda_logging"
+  name        = "gg_com_lambda_logging"
   path        = "/"
   description = "IAM policy for logging from a lambda"
 
