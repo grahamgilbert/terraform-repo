@@ -14,13 +14,32 @@ let defaultDocument = 'index.html';
 exports.handler = (event, context, callback) => {
     const request = event.Records[0].cf.request;
 
-    if(request.uri != "/") {
+    if (request.uri == "/feed.xml" || request.uri == "atom.xml") {
+
+        //Generate HTTP redirect response to a different landing page.
+        const redirectResponse = {
+            status: '301',
+            statusDescription: 'Moved Permanently',
+            headers: {
+                'location': [{
+                    key: 'Location',
+                    value: '/index.xml',
+                }],
+                'cache-control': [{
+                    key: 'Cache-Control',
+                    value: "max-age=3600"
+                }],
+            },
+        };
+        callback(null, redirectResponse);
+    }
+    if (request.uri != "/") {
         let paths = request.uri.split('/');
         let lastPath = paths[paths.length - 1];
         let isFile = lastPath.split('.').length > 1;
 
-        if(!isFile) {
-            if(lastPath != "") {
+        if (!isFile) {
+            if (lastPath != "") {
                 request.uri += "/";
             }
 
