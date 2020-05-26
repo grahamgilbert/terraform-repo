@@ -14,7 +14,7 @@ let defaultDocument = 'index.html';
 exports.handler = (event, context, callback) => {
     const request = event.Records[0].cf.request;
 
-    if (request.uri == "/feed.xml" || request.uri == "atom.xml") {
+    if (request.uri == "/feed.xml" || request.uri == "/atom.xml") {
 
         //Generate HTTP redirect response to a different landing page.
         const redirectResponse = {
