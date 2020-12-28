@@ -29,6 +29,7 @@ resource "aws_route53_record" "grahamgilbert_root" {
   type    = "A"
   name    = var.main_zone_host
   records = [var.gcp_load_balancer_ip]
+  ttl     = 60
 }
 
 resource "aws_route53_record" "www" {
