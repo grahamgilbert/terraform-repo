@@ -107,10 +107,10 @@ resource "google_compute_global_forwarding_rule" "website" {
 
 resource "google_compute_target_http_proxy" "website" {
   name    = "test-https-redirect-proxy"
-  url_map = google_compute_url_map.website.id
+  url_map = google_compute_url_map.gg_redirect.id
 }
 
-resource "google_compute_url_map" "website" {
+resource "google_compute_url_map" "gg_redirect" {
   name = "http-redirect-url-map"
   default_url_redirect {
     https_redirect = true
