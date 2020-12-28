@@ -33,7 +33,7 @@ resource "aws_cloudfront_distribution" "www_distribution" {
     cached_methods         = ["GET", "HEAD"]
 
     // This needs to match the `origin_id` above.
-    target_origin_id = "${var.root_domain_name}"
+    target_origin_id = var.root_domain_name
     min_ttl          = 0
     default_ttl      = 1800
     max_ttl          = 3600
@@ -56,7 +56,7 @@ resource "aws_cloudfront_distribution" "www_distribution" {
   }
 
   viewer_certificate {
-    acm_certificate_arn = "${aws_acm_certificate_validation.cert.certificate_arn}"
+    acm_certificate_arn = aws_acm_certificate_validation.cert.certificate_arn
     ssl_support_method  = "sni-only"
   }
 }
