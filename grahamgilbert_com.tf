@@ -24,6 +24,10 @@ resource "google_storage_bucket" "website" {
   name     = "grahamgilbert-website"
   location = "US"
   project  = google_project.gg_project.project_id
+  website {
+    main_page_suffix = "index.html"
+    not_found_page   = "404.html"
+  }
 }
 
 resource "google_storage_default_object_access_control" "website_read" {
@@ -46,10 +50,6 @@ resource "google_compute_backend_bucket" "website" {
   bucket_name = google_storage_bucket.website.name
   enable_cdn  = true
   project     = google_project.gg_project.project_id
-  website {
-    main_page_suffix = "index.html"
-    not_found_page   = "404.html"
-  }
 }
 
 # Get the managed DNS zone
