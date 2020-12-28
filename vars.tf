@@ -1,9 +1,3 @@
-provider "aws" {
-  region = "us-east-1"
-}
-
-variable "terraform_token" {}
-
 terraform {
   backend "remote" {
     hostname     = "app.terraform.io"
