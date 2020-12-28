@@ -52,6 +52,7 @@ variable "services" {
   default = [
     "logging.googleapis.com",
     "cloudbilling.googleapis.com",
+    "cloudresourcemanager.googleapis.com",
   ]
 }
 
