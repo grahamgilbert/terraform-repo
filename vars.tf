@@ -36,3 +36,24 @@ variable "gcp_project" {
 variable "gcp_region" {
   default = "us-central1"
 }
+
+variable "billing_account_id" {}
+
+variable "org_id" {
+  default     = "742625797188"
+  description = "The Google organization id in which to place the projects"
+}
+
+variable "root_id" {
+  default = "organizations/742625797188"
+}
+
+variable "GOOGLE_CREDENTIALS" {}
+
+variable "services" {
+  type = list(string)
+  default = [
+    "logging.googleapis.com",
+    "cloudbilling.googleapis.com",
+  ]
+}
