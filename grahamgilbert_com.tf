@@ -1,10 +1,10 @@
 resource "random_id" "id" {
   byte_length = "2"
-  prefix      = "${var.app_name}-${var.environment}-"
+  prefix      = "grahamgilbert.com-www-"
 }
 
 resource "google_project" "gg_project" {
-  name            = "${var.app_name}-${var.environment}"
+  name            = "grahamgilbert.com-www"
   project_id      = random_id.id.hex
   billing_account = var.billing_account_id
   org_id          = var.org_id
