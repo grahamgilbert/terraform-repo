@@ -4,7 +4,7 @@ provider "aws" {
 
 terraform {
   backend "remote" {
-    hostname = "app.terraform.io"
+    hostname     = "app.terraform.io"
     organization = "grahamgilbert"
 
     workspaces {
@@ -27,4 +27,12 @@ variable "bucket_name" {
 
 variable "three_oh_one_name" {
   default = "grahamgilbert-301"
+}
+
+variable "gcp_project" {
+  default = "terraform-repo"
+}
+
+variable "gcp_region" {
+  default = "us-central1"
 }
