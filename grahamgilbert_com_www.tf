@@ -11,7 +11,7 @@ resource "google_project" "gg_project" {
   labels          = var.labels
 }
 
-resource "google_project_service" "service" {
+resource "google_project_service" "gg_service" {
   for_each           = toset(var.services)
   service            = each.key
   project            = google_project.gg_project.project_id
