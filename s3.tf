@@ -6,7 +6,8 @@ resource "aws_s3_bucket" "www" {
     target_prefix = "logs/"
   }
 
-  acl = "private"
+  acl           = "private"
+  force_destroy = true
 }
 
 data "aws_iam_policy_document" "s3_policy" {
@@ -37,8 +38,9 @@ resource "aws_s3_bucket_policy" "www" {
 }
 
 resource "aws_s3_bucket" "three_oh_one" {
-  bucket = var.three_oh_one_name
-  acl    = "public-read"
+  bucket        = var.three_oh_one_name
+  acl           = "public-read"
+  force_destroy = true
 
   website {
     redirect_all_requests_to = "https://${var.root_domain_name}"
@@ -66,8 +68,9 @@ POLICY
 }
 
 resource "aws_s3_bucket" "log_bucket" {
-  bucket = "grahamgilbert-logs"
-  acl    = "log-delivery-write"
+  bucket        = "grahamgilbert-logs"
+  acl           = "log-delivery-write"
+  force_destroy = true
 
   lifecycle_rule {
     enabled = true
