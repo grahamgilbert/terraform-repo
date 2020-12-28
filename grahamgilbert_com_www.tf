@@ -134,7 +134,7 @@ resource "google_compute_global_forwarding_rule" "https_redirect" {
 }
 
 resource "google_service_account" "deploy_account" {
-  account_id   = "deploy_account"
+  account_id   = "deploy-account"
   display_name = "Deploy Account"
   project      = google_project.gg_project.project_id
 }
