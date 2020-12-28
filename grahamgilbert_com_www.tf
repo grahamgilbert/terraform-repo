@@ -99,7 +99,7 @@ resource "google_compute_target_https_proxy" "website" {
 # GCP forwarding rule
 resource "google_compute_global_forwarding_rule" "website" {
   provider              = google
-  name                  = "website-forwarding-rule"
+  name                  = "gg-website-lb-https"
   load_balancing_scheme = "EXTERNAL"
   ip_address            = google_compute_global_address.website.address
   ip_protocol           = "TCP"
