@@ -72,7 +72,7 @@ resource "google_compute_backend_bucket" "website" {
 # Create HTTPS certificate
 resource "google_compute_managed_ssl_certificate" "website" {
   provider = google-beta
-  name     = "website-cert"
+  name     = "wgrahamgilbert-dot-com-cert"
   managed {
     domains = [var.root_domain_name]
   }
