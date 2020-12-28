@@ -140,8 +140,7 @@ resource "google_service_account" "deploy_account" {
 }
 
 resource "google_storage_bucket_iam_member" "bucket_admin" {
-  bucket  = google_storage_bucket.website.name
-  role    = "roles/storage.admin"
-  member  = "serviceAccount:${google_service_account.deploy_account.email}"
-  project = google_project.gg_project.project_id
+  bucket = google_storage_bucket.website.name
+  role   = "roles/storage.admin"
+  member = "serviceAccount:${google_service_account.deploy_account.email}"
 }
