@@ -34,7 +34,6 @@ resource "google_storage_default_object_access_control" "website_read" {
   bucket = google_storage_bucket.website.name
   role   = "READER"
   entity = "allUsers"
-  #   project = google_project.gg_project.project_id
 }
 
 resource "google_compute_global_address" "website" {
