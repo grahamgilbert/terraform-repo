@@ -54,6 +54,7 @@ variable "services" {
     "cloudbilling.googleapis.com",
     "cloudresourcemanager.googleapis.com",
     "compute.googleapis.com",
+    "iam.googleapis.com",
   ]
 }
 
