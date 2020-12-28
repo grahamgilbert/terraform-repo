@@ -94,7 +94,7 @@ resource "google_compute_target_https_proxy" "website" {
 }
 
 # GCP forwarding rule
-resource "google_compute_global_forwarding_rule" "default" {
+resource "google_compute_global_forwarding_rule" "website" {
   provider              = google
   name                  = "website-forwarding-rule"
   load_balancing_scheme = "EXTERNAL"
@@ -103,4 +103,17 @@ resource "google_compute_global_forwarding_rule" "default" {
   port_range            = "443"
   target                = google_compute_target_https_proxy.website.self_link
   project               = google_project.gg_project.project_id
+}
+
+resource "google_compute_target_http_proxy" "website" {
+  name    = "test-https-redirect-proxy"
+  url_map = google_compute_url_map.website.id
+}
+
+resource "google_compute_url_map" "website" {
+  name = "http-redirect-url-map"
+  default_url_redirect {
+    https_redirect = true
+    strip_query    = false
+  }
 }
