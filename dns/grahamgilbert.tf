@@ -28,12 +28,7 @@ resource "aws_route53_record" "grahamgilbert_root" {
   zone_id = var.zone_id
   type    = "A"
   name    = var.main_zone_host
-
-  alias {
-    name                   = var.main_cloudfront_name
-    zone_id                = var.main_cloudfront_hosted_zone_id
-    evaluate_target_health = false
-  }
+  records = [var.gcp_load_balancer_ip]
 }
 
 resource "aws_route53_record" "www" {

@@ -74,7 +74,7 @@ resource "google_compute_managed_ssl_certificate" "website" {
   provider = google-beta
   name     = "website-cert"
   managed {
-    domains = ["test.grahamgilbert.com"]
+    domains = [var.root_domain_name]
   }
   project = google_project.gg_project.project_id
 }
@@ -131,4 +131,17 @@ resource "google_compute_global_forwarding_rule" "https_redirect" {
   port_range = "80"
   ip_address = google_compute_global_address.website.address
   project    = google_project.gg_project.project_id
+}
+
+resource "google_service_account" "deploy_account" {
+  account_id   = "deploy_account"
+  display_name = "Deploy Account"
+  project      = google_project.gg_project.project_id
+}
+
+resource "google_storage_bucket_iam_member" "bucket_admin" {
+  bucket  = google_storage_bucket.website.name
+  role    = "roles/storage.admin"
+  member  = "serviceAccount:${google_service_account.deploy_account.email}"
+  project = google_project.gg_project.project_id
 }
