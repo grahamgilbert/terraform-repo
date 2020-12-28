@@ -13,9 +13,6 @@ terraform {
       name = "terraform-repo"
     }
 
-    credentials "app.terraform.io" {
-      token = var.terraform_token
-    }
   }
 }
 
