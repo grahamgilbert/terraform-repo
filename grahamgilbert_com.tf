@@ -105,15 +105,27 @@ resource "google_compute_global_forwarding_rule" "website" {
   project               = google_project.gg_project.project_id
 }
 
-resource "google_compute_target_http_proxy" "website" {
-  name    = "test-https-redirect-proxy"
-  url_map = google_compute_url_map.gg_redirect.id
+resource "google_compute_url_map" "https_redirect" {
+  name    = "gg-website-https-redirect"
+  project = google_project.gg_project.project_id
+
+  default_url_redirect {
+    https_redirect         = true
+    redirect_response_code = "MOVED_PERMANENTLY_DEFAULT"
+    strip_query            = false
+  }
 }
 
-resource "google_compute_url_map" "gg_redirect" {
-  name = "http-redirect-url-map"
-  default_url_redirect {
-    https_redirect = true
-    strip_query    = false
-  }
+resource "google_compute_target_http_proxy" "https_redirect" {
+  name    = "gg-website-http-proxy"
+  url_map = google_compute_url_map.https_redirect.id
+  project = google_project.gg_project.project_id
+}
+
+resource "google_compute_global_forwarding_rule" "https_redirect" {
+  name       = "gg-website-lb-http"
+  target     = google_compute_target_http_proxy.https_redirect.id
+  port_range = "80"
+  ip_address = google_compute_global_address.website.address
+  project    = google_project.gg_project.project_id
 }
