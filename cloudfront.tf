@@ -4,10 +4,10 @@ resource "aws_cloudfront_distribution" "www_distribution" {
     domain_name = aws_s3_bucket.www.bucket_regional_domain_name
 
     // This can be any name to identify this origin.
-    origin_id = "${var.root_domain_name}"
+    origin_id = var.root_domain_name
 
     s3_origin_config {
-      origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
+      origin_access_identity = aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path
     }
   }
 
@@ -47,7 +47,7 @@ resource "aws_cloudfront_distribution" "www_distribution" {
     }
   }
 
-  aliases = ["${var.root_domain_name}"]
+  aliases = [var.root_domain_name]
 
   restrictions {
     geo_restriction {

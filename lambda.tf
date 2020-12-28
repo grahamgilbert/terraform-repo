@@ -31,9 +31,9 @@ data "archive_file" "redirect_lambda_zip" {
 resource "aws_lambda_function" "redirect_lambda" {
   filename         = "redirect_lambda.zip"
   function_name    = "gg_dot_com_redirect_lambda"
-  role             = "${aws_iam_role.iam_for_redirect_lambda.arn}"
+  role             = aws_iam_role.iam_for_redirect_lambda.arn
   handler          = "redirect.handler"
-  source_code_hash = "${data.archive_file.redirect_lambda_zip.output_base64sha256}"
+  source_code_hash = data.archive_file.redirect_lambda_zip.output_base64sha256
   runtime          = "nodejs10.x"
   publish          = true
 }
@@ -63,8 +63,8 @@ EOF
 }
 
 resource "aws_iam_role_policy_attachment" "lambda_logs" {
-  role       = "${aws_iam_role.iam_for_redirect_lambda.name}"
-  policy_arn = "${aws_iam_policy.lambda_logging.arn}"
+  role       = aws_iam_role.iam_for_redirect_lambda.name
+  policy_arn = aws_iam_policy.lambda_logging.arn
 }
 
 
