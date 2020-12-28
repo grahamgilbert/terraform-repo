@@ -1,11 +1,11 @@
-resource "random_id" "id" {
+resource "random_id" "backup_id" {
   byte_length = "2"
   prefix      = "home-backup-"
 }
 
 resource "google_project" "backup_project" {
   name            = "home-backup"
-  project_id      = random_id.id.hex
+  project_id      = random_id.backup_id.hex
   billing_account = var.billing_account_id
   org_id          = var.org_id
   labels          = var.labels
