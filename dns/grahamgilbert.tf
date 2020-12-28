@@ -40,14 +40,6 @@ resource "aws_route53_record" "www" {
   records = [var.main_zone_host]
 }
 
-resource "aws_route53_record" "test" {
-  zone_id = var.zone_id
-  type    = "A"
-  name    = "test.grahamgilbert.com"
-  records = ["34.120.164.89"]
-  ttl     = 60
-}
-
 resource "aws_route53_record" "gsuite_subdomains" {
   zone_id = var.zone_id
   count   = length(var.gsuite_subdomains)
