@@ -1,6 +1,6 @@
 resource "aws_acm_certificate" "cert" {
-  domain_name       = "*.${var.root_domain_name}"
-  validation_method = "DNS"
+  domain_name               = "*.${var.root_domain_name}"
+  validation_method         = "DNS"
   subject_alternative_names = ["${var.root_domain_name}"]
 }
 
