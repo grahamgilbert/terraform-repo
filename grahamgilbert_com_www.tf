@@ -20,10 +20,11 @@ resource "google_project_service" "gg_service" {
 
 
 resource "google_storage_bucket" "website" {
-  provider = google
-  name     = "grahamgilbert-website"
-  location = "US"
-  project  = google_project.gg_project.project_id
+  provider      = google
+  name          = "grahamgilbert-website"
+  location      = "US"
+  force_destroy = true
+  project       = google_project.gg_project.project_id
   website {
     main_page_suffix = "index.html"
     not_found_page   = "404.html"
