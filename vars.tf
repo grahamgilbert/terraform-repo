@@ -10,22 +10,6 @@ terraform {
   }
 }
 
-variable "www_domain_name" {
-  default = "www.grahamgilbert.com"
-}
-
-variable "root_domain_name" {
-  default = "grahamgilbert.com"
-}
-
-variable "bucket_name" {
-  default = "grahamgilbertcom"
-}
-
-variable "three_oh_one_name" {
-  default = "grahamgilbert-301"
-}
-
 variable "gcp_project" {
   default = "terraform-repo"
 }
