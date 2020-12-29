@@ -40,12 +40,12 @@ module "dns-public-zone" {
       type = "MX"
       ttl  = 300
       records = [
-        "60 aspmx4.googlemail.com",
-        "10 aspmx.l.google.com",
-        "50 aspmx3.googlemail.com",
-        "20 alt2.aspmx.l.google.com",
-        "40 aspmx2.googlemail.com",
-        "30 alt1.aspmx.l.google.com",
+        "60 aspmx4.googlemail.com.",
+        "10 aspmx.l.google.com.",
+        "50 aspmx3.googlemail.com.",
+        "20 alt2.aspmx.l.google.com.",
+        "40 aspmx2.googlemail.com.",
+        "30 alt1.aspmx.l.google.com.",
       ]
     },
     {
@@ -53,7 +53,7 @@ module "dns-public-zone" {
       type = "CNAME"
       ttl  = 300
       records = [
-        "gg-home.ddns.net",
+        "gg-home.ddns.net.",
       ]
     },
     {
@@ -61,7 +61,7 @@ module "dns-public-zone" {
       type = "CNAME"
       ttl  = 300
       records = [
-        "ghs.google.com",
+        "ghs.google.com.",
       ]
     },
     {
@@ -69,7 +69,7 @@ module "dns-public-zone" {
       type = "CNAME"
       ttl  = 300
       records = [
-        "ghs.google.com",
+        "ghs.google.com.",
       ]
     },
     {
@@ -77,7 +77,7 @@ module "dns-public-zone" {
       type = "CNAME"
       ttl  = 300
       records = [
-        "ghs.google.com",
+        "ghs.google.com.",
       ]
     },
     {
@@ -85,7 +85,7 @@ module "dns-public-zone" {
       type = "CNAME"
       ttl  = 300
       records = [
-        "ghs.google.com",
+        "ghs.google.com.",
       ]
     },
   ]
