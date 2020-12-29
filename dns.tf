@@ -11,6 +11,13 @@ resource "google_project" "dns_project" {
   labels          = var.labels
 }
 
+resource "google_project_service" "dns_service" {
+  for_each           = toset(var.services)
+  service            = each.key
+  project            = google_project.dns_project.project_id
+  disable_on_destroy = false
+}
+
 module "dns-public-zone" {
   source     = "terraform-google-modules/cloud-dns/google"
   version    = "3.0.0"
