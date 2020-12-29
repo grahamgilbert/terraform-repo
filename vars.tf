@@ -55,6 +55,7 @@ variable "services" {
     "cloudresourcemanager.googleapis.com",
     "compute.googleapis.com",
     "iam.googleapis.com",
+    "dns.googleapis.com",
   ]
 }
 
