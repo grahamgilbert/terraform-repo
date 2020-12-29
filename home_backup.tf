@@ -18,7 +18,7 @@ resource "google_project_service" "backup_services" {
   disable_on_destroy = false
 }
 
-resource "google_storage_bucket" "website" {
+resource "google_storage_bucket" "synology_backup" {
   provider      = google
   name          = "synology-backup"
   location      = "US"
