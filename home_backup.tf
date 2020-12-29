@@ -17,3 +17,12 @@ resource "google_project_service" "backup_services" {
   project            = google_project.backup_project.project_id
   disable_on_destroy = false
 }
+
+resource "google_storage_bucket" "website" {
+  provider      = google
+  name          = "synology-backup"
+  location      = "US"
+  force_destroy = true
+  project       = google_project.backup_project.project_id
+  storage_class = "ARCHIVE"
+}
