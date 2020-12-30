@@ -10,5 +10,3 @@ variable "zone_id" {
 variable "main_cloudfront_name" {}
 
 variable "main_cloudfront_hosted_zone_id" {}
-
-variable "gcp_load_balancer_ip" {}
