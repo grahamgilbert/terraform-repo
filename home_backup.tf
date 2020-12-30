@@ -20,7 +20,7 @@ resource "google_project_service" "backup_services" {
 
 resource "google_storage_bucket" "synology_backup" {
   provider      = google
-  name          = "synology-backup"
+  name          = "gg-synology-backup"
   location      = "US"
   force_destroy = true
   project       = google_project.backup_project.project_id
