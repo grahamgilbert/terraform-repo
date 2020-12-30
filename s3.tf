@@ -81,9 +81,6 @@ resource "aws_s3_bucket" "log_bucket" {
   }
 }
 
-s3_actions   = ["s3:GetObject"]
-s3_resources = "arn:aws:s3:::examplebucket/*"
-
 data "aws_iam_policy_document" "ggcom_policydoc" {
   statement {
     actions   = ["s3:*"]
