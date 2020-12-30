@@ -34,5 +34,5 @@ resource "google_storage_bucket" "plex_backup" {
   location      = "US"
   force_destroy = true
   project       = google_project.backup_project.project_id
-  storage_class = "REGIONAL"
+  #   storage_class = "REGIONAL"
 }
