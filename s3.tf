@@ -94,7 +94,7 @@ resource "aws_iam_user" "www_deploy_user" {
 }
 
 resource "aws_iam_user_policy" "www_deploy_user_policy" {
-  name   = aws_iam_user_policy.name
-  user   = aws_iam_user_policy.name
+  name   = aws_iam_user.name
+  user   = aws_iam_user.name
   policy = join("", data.aws_iam_policy_document.ggcom_policydoc.*.json)
 }
