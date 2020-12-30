@@ -17,10 +17,6 @@ resource "aws_cloudfront_distribution" "www_distribution" {
 
   // All values are defaults from the AWS console.
   default_cache_behavior {
-    lambda_function_association {
-      event_type = "origin-request"
-      lambda_arn = "${aws_lambda_function.redirect_lambda.arn}:${aws_lambda_function.redirect_lambda.version}"
-    }
 
     viewer_protocol_policy = "redirect-to-https"
     compress               = true
