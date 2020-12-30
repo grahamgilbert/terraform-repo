@@ -26,3 +26,13 @@ resource "google_storage_bucket" "synology_backup" {
   project       = google_project.backup_project.project_id
   storage_class = "ARCHIVE"
 }
+
+
+resource "google_storage_bucket" "plex_backup" {
+  provider      = google
+  name          = "gg-plex-backup"
+  location      = "US"
+  force_destroy = true
+  project       = google_project.backup_project.project_id
+  storage_class = "REGIONAL"
+}
