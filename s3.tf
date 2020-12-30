@@ -84,7 +84,7 @@ resource "aws_s3_bucket" "log_bucket" {
 data "aws_iam_policy_document" "ggcom_policydoc" {
   statement {
     actions   = ["s3:*"]
-    resources = ["${aws_s3_bucket.www.arn}/*"]
+    resources = ["${aws_s3_bucket.www.arn}/*", aws_s3_bucket.www.arn]
     effect    = "Allow"
   }
 }
