@@ -44,7 +44,7 @@ resource "google_service_account_iam_member" "service_admin" {
 
 resource "google_service_account_iam_member" "build_editor" {
   service_account_id = google_service_account.deploy_account.name
-  role               = "(roles/cloudbuild.builds.editor"
+  role               = "roles/cloudbuild.builds.editor"
   member             = "serviceAccount:${google_service_account.deploy_account.email}"
 }
 
