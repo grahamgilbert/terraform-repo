@@ -28,32 +28,28 @@ resource "google_service_account_iam_member" "deployer" {
   service_account_id = google_service_account.deploy_account.name
   role               = "roles/appengine.appAdmin"
   member             = "serviceAccount:${google_service_account.deploy_account.email}"
-  project            = google_project.salversion_project.project_id
 }
 
 resource "google_service_account_iam_member" "service_account" {
   service_account_id = google_service_account.deploy_account.name
   role               = "roles/iam.serviceAccountUser"
   member             = "serviceAccount:${google_service_account.deploy_account.email}"
-  project            = google_project.salversion_project.project_id
 }
 
 resource "google_service_account_iam_member" "service_admin" {
   service_account_id = google_service_account.deploy_account.name
   role               = "roles/appengine.serviceAdmin"
   member             = "serviceAccount:${google_service_account.deploy_account.email}"
-  project            = google_project.salversion_project.project_id
 }
 
 resource "google_service_account_iam_member" "build_editor" {
   service_account_id = google_service_account.deploy_account.name
   role               = "(roles/cloudbuild.builds.editor"
   member             = "serviceAccount:${google_service_account.deploy_account.email}"
-  project            = google_project.salversion_project.project_id
 }
 
 resource "google_app_engine_application" "salversion" {
   project       = google_project.salversion_project.project_id
-  location_id   = var.region
+  location_id   = var.gcp_region
   database_type = "CLOUD_FIRESTORE"
 }
