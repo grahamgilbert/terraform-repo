@@ -56,6 +56,7 @@ variable "services" {
     "compute.googleapis.com",
     "iam.googleapis.com",
     "dns.googleapis.com",
+    "appengine.googleapis.com",
   ]
 }
 
