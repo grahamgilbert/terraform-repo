@@ -50,6 +50,6 @@ resource "google_service_account_iam_member" "build_editor" {
 
 resource "google_app_engine_application" "salversion" {
   project       = google_project.salversion_project.project_id
-  location_id   = var.gcp_region
+  location_id   = "us-central"
   database_type = "CLOUD_FIRESTORE"
 }
