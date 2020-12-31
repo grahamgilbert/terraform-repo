@@ -24,29 +24,35 @@ resource "google_service_account" "deploy_account" {
   project      = google_project.salversion_project.project_id
 }
 
-resource "google_service_account_iam_member" "deployer" {
+resource "google_service_account_iam_member" "editor" {
   service_account_id = google_service_account.deploy_account.name
-  role               = "roles/appengine.appAdmin"
+  role               = "roles/editor"
   member             = "serviceAccount:${google_service_account.deploy_account.email}"
 }
 
-resource "google_service_account_iam_member" "service_account" {
-  service_account_id = google_service_account.deploy_account.name
-  role               = "roles/iam.serviceAccountUser"
-  member             = "serviceAccount:${google_service_account.deploy_account.email}"
-}
+# resource "google_service_account_iam_member" "deployer" {
+#   service_account_id = google_service_account.deploy_account.name
+#   role               = "roles/appengine.appAdmin"
+#   member             = "serviceAccount:${google_service_account.deploy_account.email}"
+# }
 
-resource "google_service_account_iam_member" "service_admin" {
-  service_account_id = google_service_account.deploy_account.name
-  role               = "roles/appengine.serviceAdmin"
-  member             = "serviceAccount:${google_service_account.deploy_account.email}"
-}
+# resource "google_service_account_iam_member" "service_account" {
+#   service_account_id = google_service_account.deploy_account.name
+#   role               = "roles/iam.serviceAccountUser"
+#   member             = "serviceAccount:${google_service_account.deploy_account.email}"
+# }
 
-resource "google_service_account_iam_member" "build_editor" {
-  service_account_id = google_service_account.deploy_account.name
-  role               = "roles/cloudbuild.builds.editor"
-  member             = "serviceAccount:${google_service_account.deploy_account.email}"
-}
+# resource "google_service_account_iam_member" "service_admin" {
+#   service_account_id = google_service_account.deploy_account.name
+#   role               = "roles/appengine.serviceAdmin"
+#   member             = "serviceAccount:${google_service_account.deploy_account.email}"
+# }
+
+# resource "google_service_account_iam_member" "build_editor" {
+#   service_account_id = google_service_account.deploy_account.name
+#   role               = "roles/cloudbuild.builds.editor"
+#   member             = "serviceAccount:${google_service_account.deploy_account.email}"
+# }
 
 resource "google_app_engine_application" "salversion" {
   project       = google_project.salversion_project.project_id
