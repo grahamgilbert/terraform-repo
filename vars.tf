@@ -57,6 +57,7 @@ variable "services" {
     "iam.googleapis.com",
     "dns.googleapis.com",
     "appengine.googleapis.com",
+    "firestore.googleapis.com",
   ]
 }
 
