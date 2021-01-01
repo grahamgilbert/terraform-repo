@@ -30,6 +30,15 @@ resource "google_service_account_iam_member" "editor" {
   member             = "serviceAccount:${google_service_account.deploy_account.email}"
 }
 
+resource "google_app_engine_domain_mapping" "domain_mapping" {
+  domain_name = "version.salopensource.com"
+
+  ssl_settings {
+    ssl_management_type = "AUTOMATIC"
+  }
+  project = google_project.salversion_project.project_id
+}
+
 # resource "google_service_account_iam_member" "deployer" {
 #   service_account_id = google_service_account.deploy_account.name
 #   role               = "roles/appengine.appAdmin"
