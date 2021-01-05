@@ -6,6 +6,10 @@ resource "aws_s3_bucket" "www" {
     target_prefix = "logs/"
   }
 
+ website {
+    index_document = "index.html"
+}
+
   acl           = "private"
   force_destroy = true
 }
