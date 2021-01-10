@@ -30,7 +30,7 @@ resource "google_service_account_iam_member" "editor" {
   member             = "serviceAccount:${google_service_account.deploy_account.email}"
 }
 
-resource "google_service_account_iam_member" "editor" {
+resource "google_service_account_iam_member" "owner" {
   service_account_id = google_service_account.deploy_account.name
   role               = "roles/owner"
   member             = "serviceAccount:${google_service_account.deploy_account.email}"
