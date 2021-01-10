@@ -1,15 +1,15 @@
 resource "aws_cloudfront_distribution" "www_distribution" {
-  
 
-origin {
+
+  origin {
     domain_name = aws_s3_bucket.www.website_endpoint
     origin_id   = var.root_domain_name
 
     custom_origin_config {
       origin_protocol_policy = "http-only"
-      http_port = "80"
-      https_port = "443"
-      origin_ssl_protocols = ["TLSv1"]
+      http_port              = "80"
+      https_port             = "443"
+      origin_ssl_protocols   = ["TLSv1"]
     }
   }
 
@@ -55,7 +55,7 @@ origin {
 }
 
 resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
-  comment = "Some comment"
+  comment = "Terraform managed"
 }
 
 
