@@ -30,6 +30,12 @@ resource "google_service_account_iam_member" "editor" {
   member             = "serviceAccount:${google_service_account.deploy_account.email}"
 }
 
+resource "google_service_account_iam_member" "editor" {
+  service_account_id = google_service_account.deploy_account.name
+  role               = "roles/owner"
+  member             = "serviceAccount:${google_service_account.deploy_account.email}"
+}
+
 resource "google_app_engine_domain_mapping" "domain_mapping" {
   domain_name = "version.salopensource.com"
 
