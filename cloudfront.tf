@@ -1,13 +1,15 @@
 resource "aws_cloudfront_distribution" "www_distribution" {
-  origin {
-    // Here we're using our S3 bucket's URL!
-    domain_name = aws_s3_bucket.www.bucket_regional_domain_name
+  
 
-    // This can be any name to identify this origin.
-    origin_id = var.root_domain_name
+origin {
+    domain_name = aws_s3_bucket.www.website_endpoint
+    origin_id   = var.root_domain_name
 
-    s3_origin_config {
-      origin_access_identity = aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path
+    custom_origin_config {
+      origin_protocol_policy = "http-only"
+      http_port = "80"
+      https_port = "443"
+      origin_ssl_protocols = ["TLSv1"]
     }
   }
 
