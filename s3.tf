@@ -6,9 +6,9 @@ resource "aws_s3_bucket" "www" {
     target_prefix = "logs/"
   }
 
- website {
+  website {
     index_document = "index.html"
-}
+  }
 
   acl           = "private"
   force_destroy = true
@@ -89,6 +89,12 @@ data "aws_iam_policy_document" "ggcom_policydoc" {
   statement {
     actions   = ["s3:*"]
     resources = ["${aws_s3_bucket.www.arn}/*", aws_s3_bucket.www.arn]
+    effect    = "Allow"
+  }
+
+  statement {
+    actions   = ["cloudfront:CreateInvalidation"]
+    resources = [aws_cloudfront_distribution.www_distribution.arn]
     effect    = "Allow"
   }
 }
