@@ -239,3 +239,45 @@ resource "aws_route53_record" "gilbertworks_google_site_verification" {
   ttl     = 300
   records = ["google-site-verification=wQcB3Afc-AV2w7yxcLIM95uhtaCW17efQilrCnk9NbA"]
 }
+
+resource "aws_iam_user" "gilbertworks_site_deploy" {
+  name = "gilbertworks_site_deploy"
+}
+
+data "aws_iam_policy_document" "gilbertworks_site_deploy" {
+  statement {
+    actions = [
+      "s3:GetBucketLocation",
+      "s3:ListBucket",
+    ]
+    resources = [aws_s3_bucket.gilbertworks.arn]
+  }
+
+  statement {
+    actions = [
+      "s3:DeleteObject",
+      "s3:GetObject",
+      "s3:PutObject",
+    ]
+    resources = ["${aws_s3_bucket.gilbertworks.arn}/*"]
+  }
+
+  statement {
+    actions = [
+      "cloudfront:CreateInvalidation",
+      "cloudfront:GetDistribution",
+      "cloudfront:GetInvalidation",
+    ]
+    resources = [aws_cloudfront_distribution.gilbertworks.arn]
+  }
+}
+
+resource "aws_iam_user_policy" "gilbertworks_site_deploy" {
+  name   = "gilbertworks_site_deploy"
+  user   = aws_iam_user.gilbertworks_site_deploy.name
+  policy = data.aws_iam_policy_document.gilbertworks_site_deploy.json
+}
+
+resource "aws_iam_access_key" "gilbertworks_site_deploy" {
+  user = aws_iam_user.gilbertworks_site_deploy.name
+}

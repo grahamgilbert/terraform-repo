@@ -115,8 +115,6 @@ data "aws_iam_policy_document" "ggcom_policydoc" {
     resources = [
       "${aws_s3_bucket.www.arn}/*",
       aws_s3_bucket.www.arn,
-      "${aws_s3_bucket.gilbertworks.arn}/*",
-      aws_s3_bucket.gilbertworks.arn,
     ]
     effect = "Allow"
   }
@@ -125,8 +123,6 @@ data "aws_iam_policy_document" "ggcom_policydoc" {
     actions = ["cloudfront:CreateInvalidation"]
     resources = [
       aws_cloudfront_distribution.www_distribution.arn,
-      aws_cloudfront_distribution.gilbertworks.arn,
-      aws_cloudfront_distribution.gilbertworks_www_redirect.arn,
     ]
     effect = "Allow"
   }
