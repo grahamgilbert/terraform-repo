@@ -22,7 +22,6 @@ resource "aws_s3_bucket" "gilbertworks" {
 
 resource "aws_s3_bucket" "gilbertworks_www_redirect" {
   bucket        = "www.${local.gilbertworks_domain_name}"
-  acl           = "public-read"
   force_destroy = true
 
   website {
@@ -36,24 +35,6 @@ resource "aws_s3_bucket" "gilbertworks_www_redirect" {
       }
     }
   }
-}
-
-resource "aws_s3_bucket_policy" "gilbertworks_www_redirect" {
-  bucket = aws_s3_bucket.gilbertworks_www_redirect.id
-
-  policy = <<POLICY
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Principal": "*",
-      "Action": "s3:GetObject",
-      "Resource": "${aws_s3_bucket.gilbertworks_www_redirect.arn}/*"
-    }
-  ]
-}
-POLICY
 }
 
 resource "aws_cloudfront_origin_access_identity" "gilbertworks" {
@@ -249,4 +230,12 @@ resource "aws_route53_record" "gilbertworks_mx" {
     "40 aspmx2.googlemail.com",
     "30 alt1.aspmx.l.google.com",
   ]
+}
+
+resource "aws_route53_record" "gilbertworks_google_site_verification" {
+  zone_id = aws_route53_zone.gilbertworks.zone_id
+  type    = "TXT"
+  name    = local.gilbertworks_domain_name
+  ttl     = 300
+  records = ["google-site-verification=wQcB3Afc-AV2w7yxcLIM95uhtaCW17efQilrCnk9NbA"]
 }
