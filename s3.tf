@@ -10,6 +10,14 @@ resource "aws_s3_bucket" "www" {
     index_document = "index.html"
   }
 
+  server_side_encryption_configuration {
+    rule {
+      apply_server_side_encryption_by_default {
+        sse_algorithm = "AES256"
+      }
+    }
+  }
+
   acl           = "private"
   force_destroy = true
 }
@@ -49,6 +57,14 @@ resource "aws_s3_bucket" "three_oh_one" {
   website {
     redirect_all_requests_to = "https://${var.root_domain_name}"
   }
+
+  server_side_encryption_configuration {
+    rule {
+      apply_server_side_encryption_by_default {
+        sse_algorithm = "AES256"
+      }
+    }
+  }
 }
 
 resource "aws_s3_bucket_policy" "three_oh_one" {
@@ -81,6 +97,14 @@ resource "aws_s3_bucket" "log_bucket" {
 
     expiration {
       days = 120
+    }
+  }
+
+  server_side_encryption_configuration {
+    rule {
+      apply_server_side_encryption_by_default {
+        sse_algorithm = "AES256"
+      }
     }
   }
 }
