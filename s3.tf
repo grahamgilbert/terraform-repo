@@ -111,15 +111,24 @@ resource "aws_s3_bucket" "log_bucket" {
 
 data "aws_iam_policy_document" "ggcom_policydoc" {
   statement {
-    actions   = ["s3:*"]
-    resources = ["${aws_s3_bucket.www.arn}/*", aws_s3_bucket.www.arn]
-    effect    = "Allow"
+    actions = ["s3:*"]
+    resources = [
+      "${aws_s3_bucket.www.arn}/*",
+      aws_s3_bucket.www.arn,
+      "${aws_s3_bucket.gilbertworks.arn}/*",
+      aws_s3_bucket.gilbertworks.arn,
+    ]
+    effect = "Allow"
   }
 
   statement {
-    actions   = ["cloudfront:CreateInvalidation"]
-    resources = [aws_cloudfront_distribution.www_distribution.arn]
-    effect    = "Allow"
+    actions = ["cloudfront:CreateInvalidation"]
+    resources = [
+      aws_cloudfront_distribution.www_distribution.arn,
+      aws_cloudfront_distribution.gilbertworks.arn,
+      aws_cloudfront_distribution.gilbertworks_www_redirect.arn,
+    ]
+    effect = "Allow"
   }
 }
 
