@@ -76,3 +76,11 @@ resource "aws_route53_record" "mx" {
     "30 alt1.aspmx.l.google.com",
   ]
 }
+
+resource "aws_route53_record" "apple_domain_verification" {
+  zone_id = var.zone_id
+  type    = "TXT"
+  name    = var.main_zone_host
+  ttl     = 300
+  records = ["apple-domain-verification=tfiZwPN3KALWmnW6"]
+}
